@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio &amp; Laporan Gerak Kerja Unit Laman Web — MTAQ Pulai Chondong</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --emerald: #14301f;
+      --emerald-mid: #1e462e;
+      --emerald-soft: #eef4f0;
+      --gold: #c9a227;
+      --gold-text: #8a6a00;
+      --cream: #faf8f2;
+      --card: #ffffff;
+      --ink: #1a2421;
+      --muted: #52635d;
+      --line: #dce4de;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Action Bar (hidden on print) */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(20, 48, 31, 0.96);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 2px solid var(--gold);
+    }
+    .topbar-title {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .topbar-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .btn-print {
+      background: var(--gold);
+      color: var(--emerald);
+      border: 0;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .btn-print:hover { filter: brightness(1.06); }
+
+    /* Cover / Header */
+    .hero {
+      background: linear-gradient(135deg, var(--emerald) 0%, #0d2115 100%);
+      color: #fff;
+      padding: 56px 24px 48px;
+      border-bottom: 4px solid var(--gold);
+    }
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(201, 162, 39, 0.18);
+      color: var(--gold);
+      border: 1px solid rgba(201, 162, 39, 0.45);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.2;
+      margin: 0 0 12px;
+    }
+    .hero p.subtitle {
+      margin: 0 0 28px;
+      color: #d6e2da;
+      font-size: 16px;
+      max-width: 760px;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .kpi {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .kpi strong {
+      display: block;
+      font-size: 26px;
+      color: var(--gold);
+      line-height: 1.15;
+    }
+    .kpi span {
+      font-size: 12.5px;
+      color: #dce7e0;
+    }
+
+    main {
+      padding: 36px 24px 64px;
+    }
+
+    /* Section Headings */
+    .section-head {
+      margin: 0 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 22px;
+      color: var(--emerald);
+    }
+    .section-head span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Summary Table */
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 10px rgba(20, 48, 31, 0.04);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      background: var(--emerald-soft);
+      color: var(--emerald);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .url-pill {
+      display: inline-block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      background: var(--emerald-soft);
+      color: var(--emerald);
+      padding: 2px 8px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    /* Project Cards */
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 26px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 16px rgba(20, 48, 31, 0.05);
+      break-inside: avoid;
+    }
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .project-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold-text);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .project-header h3 {
+      margin: 2px 0 4px;
+      font-size: 22px;
+      color: var(--emerald);
+    }
+    .project-tagline {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .tag {
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--emerald-soft);
+      color: var(--emerald);
+      border: 1px solid #d2e0d7;
+    }
+
+    .screenshot-frame {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f3f5f4;
+      margin-bottom: 20px;
+    }
+    .screenshot-bar {
+      background: #e9eeea;
+      padding: 7px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #c5d0c9; display: inline-block; }
+    .screenshot-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .box {
+      background: #fbfcfa;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .box.highlight {
+      background: #fdfaf0;
+      border-color: #eadca8;
+    }
+    .box h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--emerald);
+    }
+    .box.highlight h4 {
+      color: var(--gold-text);
+    }
+    .box ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13.8px;
+    }
+    .box li {
+      margin-bottom: 6px;
+    }
+    .box li:last-child { margin-bottom: 0; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    @media (max-width: 780px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      .topbar { display: none; }
+      body { background: #fff; font-size: 12px; }
+      .hero { padding: 28px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .kpi, .tag, th, .box.highlight, .valuation-banner { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      main { padding: 20px 0; }
+      .project-card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+      .screenshot-frame img { max-height: 360px; }
+      .page-break-before { page-break-before: always; break-before: page; padding-top: 10px; }
+    }
+
+    .valuation-banner {
+      background: linear-gradient(135deg, var(--emerald) 0%, #1c442c 100%);
+      color: #fff;
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      border-left: 5px solid var(--gold);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .valuation-banner .v-item strong {
+      display: block;
+      font-size: 22px;
+      color: var(--gold);
+      margin-bottom: 2px;
+    }
+    .valuation-banner .v-item span {
+      font-size: 12.5px;
+      color: #dce7e0;
+    }
+    .note-box {
+      background: #fdfaf0;
+      border: 1px solid #eadca8;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--ink);
+      margin-top: 16px;
+    }
+    @media (max-width: 780px) {
+      .valuation-banner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-title">Portfolio &amp; Laporan Gerak Kerja — Unit Laman Web MTAQ</div>
+    <div class="topbar-actions">
+      <button class="btn-print" onclick="window.print()">Cetak / Simpan PDF</button>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="container">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
+        <img src="images/logo-mtaq.png" alt="Logo MTAQ Pulai Chondong" style="height:64px;width:auto;background:#fff;padding:6px;border-radius:10px;">
+        <div>
+          <div class="badge" style="margin-bottom:6px;">Unit Laman Web &amp; Pembangunan Sistem Digital</div>
+          <div style="font-size:13.5px;color:#e4ede7;">Disediakan oleh: <strong>Ahmad Munir bin Rahman</strong> · Maahad Tahfiz Al-Quran Wal Qiraat (MTAQ) Pulai Chondong</div>
+        </div>
+      </div>
+      <h1>Portfolio &amp; Laporan Gerak Kerja</h1>
+      <p class="subtitle">
+        Dokumentasi rasmi projek pembangunan laman web, sistem pengurusan akademik tahfiz, pentadbiran sumber, serta pengurusan peranti digital untuk <strong>Maahad Tahfiz Al-Quran Wal Qiraat (MTAQ) Pulai Chondong</strong>.
+      </p>
+      <div class="kpi-grid">
+        <div class="kpi">
+          <strong>6</strong>
+          <span>Sistem &amp; Laman Web Dibina</span>
+        </div>
+        <div class="kpi">
+          <strong>6</strong>
+          <span>Aplikasi Aktif Diterbitkan (Live)</span>
+        </div>
+        <div class="kpi">
+          <strong>100%</strong>
+          <span>Infrastruktur Serverless Kos Rendah</span>
+        </div>
+        <div class="kpi">
+          <strong>Nov 2026</strong>
+          <span>Tarikh Kemas Kini Laporan</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="section-head">
+      <h2>Ringkasan Keseluruhan Projek</h2>
+      <span>6 projek utama di bawah seliaan Unit Laman Web</span>
+    </div>
+
+    <div class="summary-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Bil</th>
+            <th>Nama Sistem / Projek</th>
+            <th>Pautan / Domain</th>
+            <th>Teknologi Teras</th>
+            <th>Fokus Utama</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Website Rasmi MTAQ</strong></td>
+            <td><span class="url-pill">mtaqpc.edu.my</span></td>
+            <td>WordPress Block Theme, PHP, JS, Python, Cloudflare DNS</td>
+            <td>Portal maklumat rasmi sekolah &amp; berita automatik FB</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>e-Tasmik MTAQ</strong></td>
+            <td><span class="url-pill">etasmik.mtaqpc.edu.my</span></td>
+            <td>Cloudflare Pages (PWA), Google Apps Script, Google Sheets</td>
+            <td>Rekod Tasmik, Murajaah, Tebuk Juz &amp; Syahadah</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>eSumber MTAQ</strong></td>
+            <td><span class="url-pill">esumber.mtaqpc.edu.my</span></td>
+            <td>Cloudflare Workers, Workers Assets, D1 (SQLite)</td>
+            <td>Tempahan bilik &amp; dewan Pusat Sumber anti-pertindihan</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>MTAQ Tablet Manager</strong></td>
+            <td><span class="url-pill">tablet.mtaqpc.edu.my</span></td>
+            <td>React 19, Hono, Cloudflare D1, Access, Kotlin Android Agent</td>
+            <td>Pengurusan &amp; pemantauan tablet pelajar (MDM)</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>e-Tuntutan Kelas Al-Quran</strong></td>
+            <td><span class="url-pill">munirrr19.github.io/tuntutan-kelas</span></td>
+            <td>GitHub Pages (PWA), Google Apps Script, Google Sheets</td>
+            <td>Rekod kelas harian &amp; borang tuntutan elaun bulanan</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Ujian Syafawi Al-Quran</strong></td>
+            <td><span class="url-pill">GitHub Pages (ULBS)</span></td>
+            <td>HTML/CSS/JS (PWA), Google Apps Script, Google Sheets</td>
+            <td>Pengisian markah Ujian Syafawi &amp; Bertulis terus ke Sheet</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-head">
+      <h2>Perincian Projek &amp; Paparan Halaman</h2>
+      <span>Merangkumi skop kerja, paparan skrin sebenar, dan keistimewaan setiap sistem</span>
+    </div>
+
+    <!-- PROJEK 1 -->
+    <article class="project-card">
+      <div class="project-header">
+        <div>
+          <div class="project-num">Projek 01 · Portal Rasmi Sekolah</div>
+          <h3>Website Rasmi MTAQ Pulai Chondong</h3>
+          <p class="project-tagline">Laman web rasmi Maahad Tahfiz Al-Quran Wal Qiraat (YIK) di <strong>mtaqpc.edu.my</strong> berserta laman ujian <strong>baru.mtaqpc.edu.my</strong>.</p>
+        </div>
+      </div>
+      <div class="tech-tags">
+        <span class="tag">WordPress Block Theme (v1.5.4 live)</span>
+        <span class="tag">Cloudflare DNS</span>
+        <span class="tag">LiteSpeed Cache</span>
+        <span class="tag">Facebook Graph API</span>
+        <span class="tag">Python Generator</span>
+        <span class="tag">SEO &amp; Schema.org</span>
+      </div>
+      <div class="screenshot-frame">
+        <div class="screenshot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> https://mtaqpc.edu.my</div>
+        <img src="images/01-website-mtaq.png" alt="Paparan Halaman Utama Website Rasmi MTAQ">
+      </div>
+      <div class="two-col">
+        <div class="box">
+          <h4>Apa Yang Telah Dibuat</h4>
+          <ul>
+            <li>Membina tema blok WordPress tersuai (<code>mtaq</code>) dengan identiti korporat hijau gelap (<code>#14301f</code>) &amp; emas (<code>#c9a227</code>), khat rasmi, dan templat lengkap (laman utama, halaman, pos, carian, 404).</li>
+            <li>Menghasilkan halaman kandungan rasmi: Pengenalan, Sejarah Penubuhan, Carta Organisasi, Sistem Persekolahan &amp; Tahfiz, Sukatan Hafazan (dijana skrip Python), Data Huffaz 1996–2022, dan Dasar Portal.</li>
+            <li>Integrasi suapan berita automatik daripada halaman Facebook rasmi <code>mtaqpc</code> melalui shortcode <code>[mtaq_facebook]</code> dengan token System User kekal dan TTL cache 30 minit.</li>
+            <li>Menambah sokongan 3 bahasa (<strong>BM | EN | عربي</strong> RTL), panel Kebolehcapaian (saiz teks, kontras tinggi, garis bawah pautan), serta carian pantas REST API (<code>Ctrl+K</code>).</li>
+            <li>Pengoptimuman SEO: skema JSON-LD <code>School</code>/<code>Organization</code> dalam Yoast, <code>og:image</code> tersuai (1200×630), meta description automatik, dan lencongan 301 slug lama.</li>
+            <li><strong>Terkini (23 Nov, tema 1.5.4 live di laman rasmi):</strong> susun atur Bento baharu dengan hero dan dock akses pantas, galeri program sekolah 2026, FAQ kemasukan, berita gaya majalah, audit kebolehcapaian dan prestasi (reduced-motion, skip link, sasaran sentuh 44px, skop jadual) serta mod Arab RTL penuh dengan terjemahan lengkap.</li>
+          </ul>
+        </div>
+        <div class="box highlight">
+          <h4>Kelebihan &amp; Keistimewaan</h4>
+          <ul>
+            <li><strong>Mesra Pentadbir Tanpa Kod:</strong> Dibina sebagai WordPress Block Theme supaya guru/staf boleh mengemas kini menu, warna, dan kandungan melalui <code>wp-admin</code> tanpa menyentuh kod.</li>
+            <li><strong>Berita Automatik (Zero Double-Work):</strong> Setiap hantaran di Facebook rasmi sekolah dipaparkan secara automatik di laman web beserta salinan sandaran sekiranya API tergendala.</li>
+            <li><strong>Aliran Kerja Selamat:</strong> Mempunyai laman klon ujian (<code>baru.mtaqpc.edu.my</code>) untuk menguji tema dan kandungan sebelum diterapkan ke laman sebenar.</li>
+            <li><strong>Aksesibiliti &amp; Pelbagai Bahasa:</strong> Memenuhi keperluan pelawat tempatan dan antarabangsa (Bahasa Melayu, Inggeris, dan Arab).</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJEK 2 -->
+    <article class="project-card">
+      <div class="project-header">
+        <div>
+          <div class="project-num">Projek 02 · Sistem Akademik Tahfiz</div>
+          <h3>e-Tasmik MTAQ</h3>
+          <p class="project-tagline">Sistem rekod Tasmik, Murajaah, Tebuk Juz dan Syahadah berasaskan web &amp; telefon di <strong>etasmik.mtaqpc.edu.my</strong>.</p>
+        </div>
+      </div>
+      <div class="tech-tags">
+        <span class="tag">Cloudflare Pages (PWA)</span>
+        <span class="tag">Service Worker Offline</span>
+        <span class="tag">Google Apps Script</span>
+        <span class="tag">Google Sheets DB</span>
+        <span class="tag">Dwibahasa + Arab RTL</span>
+      </div>
+      <div class="screenshot-frame">
+        <div class="screenshot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> https://etasmik.mtaqpc.edu.my</div>
+        <img src="images/02-etasmik-mtaq.png" alt="Paparan Papan Pemuka e-Tasmik MTAQ">
+      </div>
+      <div class="two-col">
+        <div class="box">
+          <h4>Apa Yang Telah Dibuat</h4>
+          <ul>
+            <li>Membangunkan aplikasi PWA untuk guru merekod Tasmik dan Murajaah mengikut muka surat al-Quran (1–604), kehadiran (<code>TH</code>), Tebuk Juz (<code>TJ½</code> / <code>TJ</code>), dan Syahadah (3–30 juz).</li>
+            <li>Menjana <strong>Rekod Mingguan</strong> (Ahad–Sabtu) format cetakan A4 landskap mengikut susun atur borang kertas rasmi sekolah dengan kiraan automatik <code>JUM M/S</code>.</li>
+            <li>Membina papan pemuka berasingan mengikut peranan: Guru (melihat halaqah sendiri sahaja) dan Pentadbir (memantau semua halaqah, Laporan Bulanan, pengurusan guru/murid, dan import senarai kelas daripada PDF).</li>
+            <li>Menambah sokongan 3 bahasa (Melayu, English, العربية), mod Gelap/Cerah, saiz paparan boleh laras, dan getaran haptik semasa mengisi kotak muka surat di Android.</li>
+            <li><strong>Terkini (21–23 Nov):</strong> modul Khatam dan Status Syahadah terdahulu (3–30 juz, dengan pembatalan &amp; kategori lebih tinggi sahaja), <strong>Laporan Mingguan perseorangan</strong> pelajar yang boleh dicetak atau dikongsi ke WhatsApp ibu bapa, nama guru kelas pada tandatangan Mingguan, leret antara tab, nav bawah telefon baharu, rupa Guru/Pentadbir disegarkan, serta kebolehcapaian semua halaman. Kod disusun semula secara modular (<code>src/</code>).</li>
+          </ul>
+        </div>
+        <div class="box highlight">
+          <h4>Kelebihan &amp; Keistimewaan</h4>
+          <ul>
+            <li><strong>Berfungsi Tanpa Internet (Offline-First):</strong> Dibuka serta-merta daripada cache telefon; rekod disimpan dan dihantar di latar belakang dengan cubaan semula automatik walaupun liputan Wi-Fi/data lemah.</li>
+            <li><strong>Kos Penyelenggaraan Sifar:</strong> Menggabungkan Cloudflare Pages dan Google Sheets sebagai pangkalan data tanpa sebarang sewaan pelayan bulanan.</li>
+            <li><strong>Privasi &amp; Kawalan Akses Ketat:</strong> Kata laluan guru disimpan sebagai hash dalam Script Properties, tiada data murid didedahkan dalam kod repositori, dan capaian dihadkan mengikut halaqah.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJEK 3 -->
+    <article class="project-card">
+      <div class="project-header">
+        <div>
+          <div class="project-num">Projek 03 · Pengurusan Sumber Sekolah</div>
+          <h3>eSumber MTAQ</h3>
+          <p class="project-tagline">Sistem tempahan bilik dan dewan Pusat Sumber MTAQ secara dalam talian di <strong>esumber.mtaqpc.edu.my</strong>.</p>
+        </div>
+      </div>
+      <div class="tech-tags">
+        <span class="tag">Cloudflare Workers</span>
+        <span class="tag">Workers Assets</span>
+        <span class="tag">Cloudflare D1 (SQLite)</span>
+        <span class="tag">Atomic SQL Lock</span>
+        <span class="tag">Panel Admin</span>
+      </div>
+      <div class="screenshot-frame">
+        <div class="screenshot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> https://esumber.mtaqpc.edu.my</div>
+        <img src="images/03-esumber-mtaq.png" alt="Paparan Tempahan Bilik eSumber MTAQ">
+      </div>
+      <div class="two-col">
+        <div class="box">
+          <h4>Apa Yang Telah Dibuat</h4>
+          <ul>
+            <li>Membangunkan portal tempahan untuk 6 ruang utama (<em>Dewan Tok Guru, Dewan As-Syatibiy, Bilik Seminar, Bilik ICT, Maktabah, Bilik Gerakan</em>) bagi kegunaan 45+ orang guru.</li>
+            <li>Menyediakan borang tempahan pantas dengan butang tempoh segera (<code>1 jam</code>, <code>2 jam</code>, <code>4 jam</code>), sokongan tempahan beberapa hari berturut-turut, dan paparan jadual tempahan akan datang.</li>
+            <li>Membina halaman <code>/admin</code> yang dilindungi kata laluan untuk mengurus senarai guru dalam D1 serta membatalkan tempahan apabila diperlukan.</li>
+            <li>Menyertakan ujian automatik (<code>node --test</code>) bagi mengesahkan logik penolakan pertindihan masa dan tarikh mustahil (cth. 31 Feb).</li>
+            <li><strong>Terkini (18–21 Nov):</strong> reka semula UI mobile-first (telefon, tablet, desktop), aplikasi boleh dipasang (PWA manifest), panel admin dengan tab Akan Datang / Telah Lepas / Senarai Guru berserta sejarah dan cetakan, had 10 percubaan kata laluan salah seminit setiap IP, nama guru unik, dan struktur projek disusun semula (<code>ARCHITECTURE.md</code>).</li>
+          </ul>
+        </div>
+        <div class="box highlight">
+          <h4>Kelebihan &amp; Keistimewaan</h4>
+          <ul>
+            <li><strong>Semakan Pertindihan Atomik:</strong> Pertindihan bilik dan masa disemak secara atomik dalam satu pertanyaan SQL pada D1 — mustahil berlaku tempahan berganda walaupun dua guru menekan hantar pada saat yang sama.</li>
+            <li><strong>Pantas &amp; Ringan di Edge:</strong> Berjalan sepenuhnya di Cloudflare Workers tanpa pelayan tradisional, memberikan masa tindak balas hampir serta-merta.</li>
+            <li><strong>Sandaran Pilihan ke Google Sheet:</strong> Menyokong salinan baris secara tidak segerak (<code>ctx.waitUntil</code>) ke Google Sheet tanpa melambatkan pengguna.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJEK 4 -->
+    <article class="project-card">
+      <div class="project-header">
+        <div>
+          <div class="project-num">Projek 04 · Pengurusan Peranti (MDM)</div>
+          <h3>MTAQ Tablet Manager</h3>
+          <p class="project-tagline">Sistem pengurusan tablet pelajar (Dashboard Cloud + Android Agent) di <strong>tablet.mtaqpc.edu.my</strong>.</p>
+        </div>
+      </div>
+      <div class="tech-tags">
+        <span class="tag">React 19 + TypeScript</span>
+        <span class="tag">Hono + Cloudflare Workers</span>
+        <span class="tag">Cloudflare D1 (12 Migrasi)</span>
+        <span class="tag">Cloudflare Access (Zero Trust)</span>
+        <span class="tag">Kotlin + Jetpack Compose</span>
+      </div>
+      <div class="screenshot-frame">
+        <div class="screenshot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> https://tablet.mtaqpc.edu.my</div>
+        <img src="images/04-mtaq-tablet-manager.png" alt="Paparan Dashboard MTAQ Tablet Manager">
+      </div>
+      <div class="two-col">
+        <div class="box">
+          <h4>Apa Yang Telah Dibuat</h4>
+          <ul>
+            <li>Membina papan pemuka pentadbir (React 19 + Vite + Hono) merangkumi modul Pengurusan Tablet, Penggunaan Aplikasi (7 hari), Pengurusan Pelajar, Rekod Pinjaman, Pengurusan Pengguna, dan Tetapan dwibahasa (BM/EN).</li>
+            <li>Membangunkan aplikasi <strong>Android Agent</strong> asli menggunakan Kotlin, Jetpack Compose, Room DB, dan WorkManager untuk mengumpul statistik penggunaan aplikasi (<code>UsageStatsManager</code>) dan menghantar <em>heartbeat</em> secara berkala.</li>
+            <li>Melaksanakan aliran <em>enrollment</em> peranti menggunakan kod sekali guna 15 minit berbentuk kod QR serta fungsi pembatalan kelayakan (<em>credential revocation</em>) untuk tablet hilang/dicuri.</li>
+            <li>Menjalankan ujian lapangan pada tablet fizikal sebenar (Huawei &amp; Samsung) serta ujian unit automatik (60 ujian Worker + 44 ujian Android).</li>
+            <li><strong>Terkini (12–13 Nov):</strong> modul Pinjaman: pelajar boleh meminjam dan menamatkan pinjaman terus dari aplikasi tablet, medan Kelas wajib, nama tablet dipaparkan pada dashboard, serta admin boleh memadam rekod dan mencetak PDF.</li>
+          </ul>
+        </div>
+        <div class="box highlight">
+          <h4>Kelebihan &amp; Keistimewaan</h4>
+          <ul>
+            <li><strong>Keselamatan Zero Trust:</strong> Staf log masuk melalui Google OAuth yang disahkan oleh Cloudflare Access JWT (RS256) + jadual peranan D1. Peranti pula menggunakan kelayakan 256-bit yang hanya disimpan sebagai hash SHA-256.</li>
+            <li><strong>Ketepatan Data Rentas Jenama Android:</strong> Algoritma pengiraan hari bucket penggunaan (<code>UsageDays.bucketDay()</code>) ditentukur khas untuk mengatasi perbezaan cara Huawei dan Samsung memotong log harian.</li>
+            <li><strong>Seni Bina Moden Berskala Besar:</strong> Dibina dengan 12 migrasi D1 berstruktur dan dokumentasi serahan teknikal yang lengkap.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJEK 5 -->
+    <article class="project-card">
+      <div class="project-header">
+        <div>
+          <div class="project-num">Projek 05 · Pentadbiran &amp; Kewangan</div>
+          <h3>e-Tuntutan Kelas Al-Quran</h3>
+          <p class="project-tagline">Sistem rekod kelas harian guru dan penjanaan Borang Tuntutan Mengajar bulanan di <strong>munirrr19.github.io/tuntutan-kelas</strong>.</p>
+        </div>
+      </div>
+      <div class="tech-tags">
+        <span class="tag">GitHub Pages (PWA)</span>
+        <span class="tag">Offline Queue</span>
+        <span class="tag">Google Apps Script</span>
+        <span class="tag">Google Sheets</span>
+        <span class="tag">Eksport PDF Claim</span>
+      </div>
+      <div class="screenshot-frame">
+        <div class="screenshot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> https://munirrr19.github.io/tuntutan-kelas/</div>
+        <img src="images/05-etuntutan-kelas.png" alt="Paparan Catat Kelas e-Tuntutan Al-Quran">
+      </div>
+      <div class="two-col">
+        <div class="box">
+          <h4>Apa Yang Telah Dibuat</h4>
+          <ul>
+            <li>Membina borang catat kelas pantas untuk guru memilih tarikh, Tingkatan (<code>1A</code>–<code>6B</code>, <code>Syahadah</code>, <code>Tahsin</code>, <code>Daurah</code>), masa mula/tamat (sela 15 minit), dan kelas intensif.</li>
+            <li>Pengiraan automatik jumlah jam dan bayaran (RM) mengikut kadar yang ditetapkan dalam Google Sheet, berserta tab <strong>Borang</strong> bulanan dan butang <strong>SELESAI</strong> untuk mengunci rekod bulan.</li>
+            <li>Menyediakan halaman Admin/Setiausaha untuk memantau status penghantaran semua guru, menjana senarai penerima imbuhan, dan mencetak surat claim rasmi dalam format PDF.</li>
+            <li><strong>Terkini (18–21 Nov):</strong> butang <strong>Jadual</strong> kelas bulanan (dimuat naik admin), UI responsif direka semula untuk telefon/tablet/desktop, kebolehcapaian WCAG 2.1 AA, lajur HARI pada borang A4, kod dipecah kepada modul dan ujian unit ditambah.</li>
+          </ul>
+        </div>
+        <div class="box highlight">
+          <h4>Kelebihan &amp; Keistimewaan</h4>
+          <ul>
+            <li><strong>Link Peribadi Tanpa Kata Laluan:</strong> Setiap guru diberi pautan unik (dihantar melalui WhatsApp) yang boleh dibatalkan atau dijana semula oleh admin — tiada isu terlupa kata laluan.</li>
+            <li><strong>Gilir Simpanan Luar Talian &amp; Amaran Bertindih:</strong> Rekod tidak akan hilang walaupun guru tiada capaian internet, dan sistem memberi amaran awal sekiranya masa kelas yang dimasukkan bertindih.</li>
+            <li><strong>Mempercepatkan Urusan Kewangan:</strong> Menggantikan pengisian borang kertas manual kepada pengiraan automatik dan cetakan PDF sedia serah.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJEK 6 -->
+    <article class="project-card">
+      <div class="project-header">
+        <div>
+          <div class="project-num">Projek 06 · Penilaian &amp; Peperiksaan</div>
+          <h3>Ujian Syafawi Al-Quran (ULBS)</h3>
+          <p class="project-tagline">Sistem pengisian dan pengiraan markah Ujian Syafawi &amp; Bertulis Al-Quran terus ke Google Sheet rasmi.</p>
+        </div>
+      </div>
+      <div class="tech-tags">
+        <span class="tag">PWA Web App</span>
+        <span class="tag">Google Apps Script</span>
+        <span class="tag">Google Sheets (ISI MARKAH)</span>
+        <span class="tag">Cetakan A4 Landskap</span>
+      </div>
+      <div class="screenshot-frame">
+        <div class="screenshot-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Aplikasi Web Ujian Syafawi Al-Quran (Paparan Tempatan)</div>
+        <img src="images/06-ujian-quran.png" alt="Paparan Pengisian Markah Ujian Syafawi Al-Quran">
+      </div>
+      <div class="two-col">
+        <div class="box">
+          <h4>Apa Yang Telah Dibuat</h4>
+          <ul>
+            <li>Membina antaramuka pengisian markah berstruktur mengikut rubrik peperiksaan: tab <strong>Syafawi 40%</strong> (8 komponen Hafazan <code>/10</code>, Tajwid <code>/15</code>, Fasahah <code>/5</code>), tab <strong>Bertulis 60%</strong>, dan tab <strong>Keputusan</strong>.</li>
+            <li>Pengiraan segera di skrin bagi jumlah Hafazan (<code>/80</code>), Jumlah Keseluruhan (<code>/100</code>), dan wajaran <code>Markah 40%</code> serta navigasi pelajar sebelumnya/seterusnya (<code>‹</code> / <code>›</code>).</li>
+            <li>Menghubungkan aplikasi terus ke helaian <code>ISI MARKAH</code> dalam Google Sheet melalui Apps Script tanpa mengubah formula sedia ada pada helaian tersebut.</li>
+            <li><strong>Terkini (16 Nov):</strong> penjenamaan ULBS (logo pada header, cetakan dan favicon; fon Playfair Display &amp; Poppins), senarai pelajar sendiri yang lebih kemas, serta aplikasi boleh dipasang di skrin utama (manifest &amp; ikon).</li>
+          </ul>
+        </div>
+        <div class="box highlight">
+          <h4>Kelebihan &amp; Keistimewaan</h4>
+          <ul>
+            <li><strong>Terus Ke Helaian Rasmi:</strong> Penguji boleh memasukkan markah menggunakan telefon/tablet semasa sesi ujian lisan berlangsung dan data terus masuk ke Google Sheet tanpa perlu menyalin semula.</li>
+            <li><strong>Kawalan Akses Ringkas &amp; Sedia Cetak:</strong> Dilindungi kod akses (<code>PASSCODE</code>) serta mempunyai susun atur cetakan keputusan A4 landskap yang kemas.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- HALAMAN BELAKANG: ANGGARAN NILAI PASARAN & KOS PEMBANGUNAN LUAR -->
+    <section class="page-break-before">
+      <div class="section-head">
+        <h2>Anggaran Nilai Pasaran &amp; Penjimatan Kos Pembangunan</h2>
+        <span>Anggaran kos sekiranya projek diupah kepada pembangun bebas (freelance) atau syarikat perisian luar</span>
+      </div>
+
+      <div class="valuation-banner">
+        <div class="v-item">
+          <strong>RM 17,800 – RM 30,300</strong>
+          <span>Anggaran Upah Pembangun Bebas (Freelance)</span>
+        </div>
+        <div class="v-item">
+          <strong>RM 39,000 – RM 74,000</strong>
+          <span>Anggaran Upah Syarikat / Agensi Perisian</span>
+        </div>
+        <div class="v-item">
+          <strong>Kos Pembangunan Dalaman: RM 0</strong>
+          <span>Dibangunkan sendiri oleh Unit Laman Web MTAQ</span>
+        </div>
+      </div>
+
+      <div class="summary-card" style="margin-bottom: 18px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Bil</th>
+              <th>Projek &amp; Skop Kerja Utama</th>
+              <th style="width: 155px;">Anggaran Freelance</th>
+              <th style="width: 170px;">Anggaran Syarikat / Agensi</th>
+              <th>Kos Infrastruktur Semasa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                <strong>Website Rasmi MTAQ (<code>mtaqpc.edu.my</code>)</strong><br>
+                <span style="color:var(--muted);font-size:12.5px;">Tema blok WordPress tersuai, 3 bahasa (BM/EN/AR RTL), panel kebolehcapaian, integrasi automatik Facebook Graph API, SEO Schema.org &amp; laman ujian.</span>
+              </td>
+              <td><strong>RM 2,500 – RM 4,000</strong></td>
+              <td><strong>RM 5,000 – RM 9,000</strong></td>
+              <td>Hosting cPanel &amp; domain sekolah sedia ada; DNS Cloudflare percuma.</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <strong>e-Tasmik MTAQ (<code>etasmik.mtaqpc.edu.my</code>)</strong><br>
+                <span style="color:var(--muted);font-size:12.5px;">PWA offline-first, kawalan peranan Guru/Pentadbir, 3 bahasa RTL, cetakan A4 Rekod Mingguan, Laporan Bulanan, import PDF &amp; backend Apps Script.</span>
+              </td>
+              <td><strong>RM 3,000 – RM 5,000</strong></td>
+              <td><strong>RM 6,000 – RM 12,000</strong></td>
+              <td><strong>RM 0 / bulan</strong> (Cloudflare Pages + Google Apps Script &amp; Sheets).</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                <strong>eSumber MTAQ (<code>esumber.mtaqpc.edu.my</code>)</strong><br>
+                <span style="color:var(--muted);font-size:12.5px;">Portal tempahan 6 bilik/dewan, semakan pertindihan SQL atomik (D1), tempahan berbilang hari, panel admin &amp; ujian automatik.</span>
+              </td>
+              <td><strong>RM 1,500 – RM 2,500</strong></td>
+              <td><strong>RM 3,500 – RM 6,000</strong></td>
+              <td><strong>RM 0 / bulan</strong> (Cloudflare Workers &amp; D1 pelan percuma).</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                <strong>MTAQ Tablet Manager (<code>tablet.mtaqpc.edu.my</code>)</strong><br>
+                <span style="color:var(--muted);font-size:12.5px;">Sistem MDM penuh: Dashboard React 19 + Hono API + D1 (12 migrasi) + Zero Trust Access + QR enrollment + Android Agent asli (Kotlin/Compose).</span>
+              </td>
+              <td><strong>RM 8,000 – RM 14,000</strong></td>
+              <td><strong>RM 18,000 – RM 35,000</strong></td>
+              <td><strong>RM 0 / bulan</strong> (Cloudflare Workers, D1 &amp; Access pelan percuma).</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>
+                <strong>e-Tuntutan Kelas Al-Quran (<code>tuntutan-kelas</code>)</strong><br>
+                <span style="color:var(--muted);font-size:12.5px;">PWA dengan gilir luar talian, link peribadi tanpa kata laluan, kiraan automatik jam &amp; elaun RM, kunci bulan &amp; eksport surat claim PDF.</span>
+              </td>
+              <td><strong>RM 1,800 – RM 3,000</strong></td>
+              <td><strong>RM 4,000 – RM 7,500</strong></td>
+              <td><strong>RM 0 / bulan</strong> (GitHub Pages + Google Apps Script &amp; Sheets).</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>
+                <strong>Ujian Syafawi Al-Quran (<code>Ujian-Quran</code>)</strong><br>
+                <span style="color:var(--muted);font-size:12.5px;">Aplikasi PWA pengisian markah Syafawi 40% &amp; Bertulis 60%, pengiraan wajaran masa nyata, cetakan A4 landskap &amp; integrasi Google Sheet.</span>
+              </td>
+              <td><strong>RM 1,000 – RM 1,800</strong></td>
+              <td><strong>RM 2,500 – RM 4,500</strong></td>
+              <td><strong>RM 0 / bulan</strong> (GitHub Pages + Google Apps Script &amp; Sheets).</td>
+            </tr>
+            <tr style="background:var(--emerald-soft);">
+              <td colspan="2"><strong>JUMLAH ANGGARAN NILAI PASARAN (6 PROJEK)</strong></td>
+              <td><strong>RM 17,800 – RM 30,300</strong></td>
+              <td><strong>RM 39,000 – RM 74,000</strong></td>
+              <td><strong>Penjimatan penuh kos pembangunan</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <strong>Nota Penilaian &amp; Rujukan Kadar Pasaran Malaysia:</strong>
+        <ul style="margin:8px 0 0;padding-left:18px;">
+          <li><strong>Website Korporat / Custom WordPress:</strong> Kadar pasaran tempatan ialah RM 1,500–RM 6,000 (freelance) dan RM 4,000–RM 10,000+ (agensi bagi portal 5–15+ halaman serta integrasi API/SEO).</li>
+          <li><strong>Aplikasi Web Tersuai (Web App / Portal Dalaman):</strong> Kadar pasaran Malaysia bagi sistem web tersuai asas (<em>MVP</em>) bermula sekitar RM 10,000–RM 35,000 (freelance penuh) atau RM 15,000–RM 40,000 (agensi), manakala modul ringkas oleh freelance sekitar RM 1,500–RM 6,000.</li>
+          <li><strong>Aplikasi Android Native + Dashboard Web (MDM):</strong> Kadar pasaran bagi aplikasi Android asas ialah RM 8,000–RM 25,000 (freelance) dan RM 30,000–RM 80,000 (agensi bagi sistem Android + papan pemuka pentadbir web).</li>
+          <li><strong>Kos Tersembunyi yang Turut Dijimatkan:</strong> Anggaran di atas <em>belum termasuk</em> caj penyelenggaraan tahunan vendor luar (lazimnya <strong>15%–25% setahun</strong>) dan sewaan pelayan/VPS (<strong>RM 100–RM 500+/bulan</strong>).</li>
+        </ul>
+        <div style="margin-top:8px;font-size:12px;color:var(--muted);">
+          <em>Rujukan penanda aras pasaran Malaysia (2025–2026): ElfStudio.my, ZenWeb.my, FidoDesign.net, NasiLemakTech.com, AdvisoryApps.com, dan Ighna.my. Anggaran dalam jadual di atas ditetapkan pada paras konservatif.</em>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Laporan Gerak Kerja Unit Laman Web · Disediakan oleh Ahmad Munir bin Rahman · Maahad Tahfiz Al-Quran Wal Qiraat (MTAQ) Pulai Chondong · Dikemas kini 23 November 2026
+  </footer>
+
+</body>
+</html>
