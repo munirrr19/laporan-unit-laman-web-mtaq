@@ -401,7 +401,16 @@
       th, td { padding: 10px 10px; }
     }
 
-    .box li, .project-tagline, .note-box li { text-wrap: pretty; overflow-wrap: break-word; }
+    .box li, .project-tagline, .note-box li, .hero p.subtitle {
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      text-wrap: pretty;
+      overflow-wrap: break-word;
+    }
+    /* Jadual kekal rata kiri supaya sel sempit tidak berjurang */
+    .summary-card td, .summary-card th { text-align: left; hyphens: manual; }
   </style>
 </head>
 <body>
