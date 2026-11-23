@@ -365,24 +365,42 @@
     @media (max-width: 780px) {
       .valuation-banner { grid-template-columns: 1fr; }
     }
+
+    .hero-id { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .hero-logo { height: 64px; width: auto; flex: none; background: #fff; padding: 6px; border-radius: 10px; }
+    .hero-by { font-size: 13.5px; color: #e4ede7; }
+    .btn-print { white-space: nowrap; }
+    @media (max-width: 600px) {
+      .topbar { padding: 8px 14px; gap: 10px; }
+      .topbar-title { font-size: 13px; }
+      .btn-print { padding: 7px 12px; font-size: 12px; }
+      .hide-sm { display: none; }
+      .hero { padding: 28px 16px 32px; }
+      .hero-id { gap: 12px; align-items: flex-start; }
+      .hero-logo { height: 52px; padding: 4px; }
+      .hero .badge { font-size: 10.5px; padding: 3px 10px; letter-spacing: 0.4px; }
+      .hero-by { font-size: 12.5px; }
+      .hero p.subtitle { font-size: 14.5px; }
+      .kpi strong { font-size: 22px; }
+    }
   </style>
 </head>
 <body>
 
   <div class="topbar">
-    <div class="topbar-title">Portfolio &amp; Laporan Gerak Kerja — Unit Laman Web MTAQ</div>
+    <div class="topbar-title"><span class="hide-sm">Portfolio &amp; </span>Laporan Gerak Kerja<span class="hide-sm"> — Unit Laman Web MTAQ</span></div>
     <div class="topbar-actions">
-      <button class="btn-print" onclick="window.print()">Cetak / Simpan PDF</button>
+      <button class="btn-print" onclick="window.print()">Cetak<span class="hide-sm"> / Simpan PDF</span></button>
     </div>
   </div>
 
   <header class="hero">
     <div class="container">
-      <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap;">
-        <img src="images/logo-mtaq.png" alt="Logo MTAQ Pulai Chondong" style="height:64px;width:auto;background:#fff;padding:6px;border-radius:10px;">
+      <div class="hero-id">
+        <img class="hero-logo" src="images/logo-mtaq.png" alt="Logo MTAQ Pulai Chondong">
         <div>
           <div class="badge" style="margin-bottom:6px;">Unit Laman Web &amp; Pembangunan Sistem Digital</div>
-          <div style="font-size:13.5px;color:#e4ede7;">Disediakan oleh: <strong>Ahmad Munir bin Rahman</strong> · Maahad Tahfiz Al-Quran Wal Qiraat (MTAQ) Pulai Chondong</div>
+          <div class="hero-by">Disediakan oleh: <strong>Ahmad Munir bin Rahman</strong> · Maahad Tahfiz Al-Quran Wal Qiraat (MTAQ) Pulai Chondong</div>
         </div>
       </div>
       <h1>Portfolio &amp; Laporan Gerak Kerja</h1>
